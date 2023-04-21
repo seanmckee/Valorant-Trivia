@@ -5,7 +5,7 @@ import Login from "./assets/pages/Login";
 
 function App() {
   return (
-    <div className="App">
+    <div className="">
       <Router>
         <Navbar />
         <Routes>
