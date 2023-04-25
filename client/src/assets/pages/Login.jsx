@@ -19,9 +19,15 @@ const Login = () => {
         username,
         password,
       });
-      setCookies("access_token", response.data.token);
-      window.localStorage.setItem("userID", response.data.userID);
-      navigate("/");
+      if (response.data.userID === undefined) {
+        alert("Wrong Username and/or Password");
+        setUsername("");
+        setPassword("");
+      } else {
+        setCookies("access_token", response.data.token);
+        window.localStorage.setItem("userID", response.data.userID);
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
     }

@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const answerSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: String,
   votes: Number,
 });
@@ -12,6 +11,7 @@ const QuestionSchema = new mongoose.Schema({
     required: true,
   },
   //   answers: [{ type: String, votes: Number, required: true }],
+  //   answers: [answerSchema],
   answers: [answerSchema],
   voted: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
   userOwner: {
@@ -22,3 +22,5 @@ const QuestionSchema = new mongoose.Schema({
 });
 
 export const QuestionModel = mongoose.model("questions", QuestionSchema);
+
+answers: [];
