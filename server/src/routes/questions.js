@@ -17,9 +17,14 @@ router.get("/", async (req, res) => {
 });
 
 // create new question (must be logged in)
-router.post("/", verifyToken, async (req, res) => {
+router.post("/:id", verifyToken, async (req, res) => {
   const question = new QuestionModel(req.body);
+  console.log("the id" + question._id);
   try {
+    await UserModel.findOneAndUpdate(
+      { _id: id },
+      { $push: { userOwner: question._id } }
+    );
     const response = await question.save();
     res.json(response);
   } catch (error) {

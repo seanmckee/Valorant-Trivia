@@ -3,7 +3,7 @@ import React from "react";
 const TriviaCard = ({ question, answers }) => {
   return (
     <div>
-      <form className=" bg-red-400 text-slate-50 p-5 rounded-md">
+      <form className=" text-red-400 bg-white rounded-2xl h-[200px] p-5 shadow-xl border border-red-400 border-1">
         <h1 className="text-center">{question}</h1>
 
         {/* <li key={answers._id} className="">
@@ -22,7 +22,7 @@ const TriviaCard = ({ question, answers }) => {
           </div>
         ))}
 
-        <button className="bg-slate-50 text-red-400 p-1 rounded-md">
+        <button className="p-1 bg-red-400 text-slate-50 m-2 rounded-md w-[75px] mx-auto">
           Submit
         </button>
       </form>
