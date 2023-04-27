@@ -24,10 +24,6 @@ const Navbar = () => {
         Home
       </Link>
 
-      <Link to="/account" className="mx-5">
-        Account
-      </Link>
-
       {!cookies.access_token ? (
         <Link to="login" className="mx-5">
           Login
@@ -41,6 +37,9 @@ const Navbar = () => {
           >
             <CreateTrivia />
           </Popup>
+          <Link to="/account" className="mx-5">
+            Account
+          </Link>
           <button onClick={logout} className="mx-5 mt-[-9px]">
             Logout
           </button>

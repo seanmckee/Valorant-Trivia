@@ -22,7 +22,7 @@ const Home = () => {
   // console.log(trivia);
 
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[60%] mx-auto">
       <h1 className="text-center text-red-400 text-3xl font-semibold mt-5 mb-1">
         Home
       </h1>

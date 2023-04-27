@@ -13,6 +13,9 @@ const QuestionSchema = new mongoose.Schema({
   //   answers: [{ type: String, votes: Number, required: true }],
   //   answers: [answerSchema],
   answers: [answerSchema],
+  correctAnswerIndex: { type: Number, required: true },
+  correctlyAnswered: { type: Number },
+  incorrectlyAnswered: { type: Number },
   voted: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
   userOwner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +26,4 @@ const QuestionSchema = new mongoose.Schema({
 
 export const QuestionModel = mongoose.model("questions", QuestionSchema);
 
-answers: [];
+// answers: [];

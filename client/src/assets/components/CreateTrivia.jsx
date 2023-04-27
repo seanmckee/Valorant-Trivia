@@ -14,11 +14,17 @@ const CreateTrivia = () => {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const [currentAnswer, setCurrentAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState();
 
   // const [trivia, setTrivia] = useState({
   //   question: question,
   //   answers: answers,
   // });
+
+  const onChange = (event) => {
+    setCorrectAnswer(event.target.value);
+    console.log(correctAnswer);
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +33,12 @@ const CreateTrivia = () => {
       console.log({ question, answers, userOwner: userID });
       await axios.post(
         `http://localhost:3001/questions/${userID}`,
-        { question, answers, userOwner: userID },
+        {
+          question,
+          answers,
+          userOwner: userID,
+          correctAnswerIndex: correctAnswer,
+        },
         {
           headers: { authorization: cookies.access_token },
         }
@@ -93,18 +104,37 @@ const CreateTrivia = () => {
             <AiFillPlusCircle />
           </button>
         </div>
+        <p className="text-center text-red-400 mb-1">Select Correct Answer</p>
 
         {answers.map((answer, index) => (
-          <div className="mx-auto" key={index}>
-            <ol className="flex justify-between w-[250px] ">
-              <li className="mt-3 text-red-400">{answer.name}</li>
+          <div className="ml-5" key={index}>
+            <div className="flex justify-between mx-auto w-[250px] ">
+              <input
+                className="mr-2"
+                onChange={(event) => {
+                  setCorrectAnswer(index);
+                }}
+                type="radio"
+                name="option"
+                id="option"
+              />
+              <label className="mt-2" htmlFor="option">
+                {answer.name}
+              </label>
               <button
                 className="p-2 bg-red-400 text-slate-50 m-2 rounded-md px-4"
                 onClick={() => deleteAnswer(event, index)}
               >
                 <FaTrash size={12} />
               </button>
-            </ol>
+              {/* <li className="mt-3 text-red-400">{answer.name}</li>
+              <button
+                className="p-2 bg-red-400 text-slate-50 m-2 rounded-md px-4"
+                onClick={() => deleteAnswer(event, index)}
+              >
+                <FaTrash size={12} />
+              </button> */}
+            </div>
           </div>
         ))}
         {/* <input
