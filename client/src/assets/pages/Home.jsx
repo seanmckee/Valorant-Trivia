@@ -31,7 +31,12 @@ const Home = () => {
       </p>
       <div className="grid grid-cols-3 gap-5">
         {trivia.map((t) => (
-          <TriviaCard key={t._id} question={t.question} answers={t.answers} />
+          <TriviaCard
+            key={t._id}
+            question={t.question}
+            answers={t.answers}
+            questionID={t._id}
+          />
         ))}
       </div>
     </div>

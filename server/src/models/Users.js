@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const questionAnsweredSchema = new mongoose.Schema({
-  correct: { type: mongoose.Schema.Types.ObjectId, ref: "questions" },
-  incorrect: { type: mongoose.Schema.Types.ObjectID, ref: "questions" },
+  question: { type: mongoose.Schema.Types.ObjectId, ref: "questions" },
+  correct: { type: Boolean, required: true },
 });
 
 const UserSchema = new mongoose.Schema({

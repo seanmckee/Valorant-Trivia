@@ -1,9 +1,53 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useGetUserID } from "../../hooks/useGetUserID";
+import { useCookies } from "react-cookie";
 
-const TriviaCard = ({ question, answers }) => {
-  const onSubmit = (event) => {
-    event.preventDefault();
+const TriviaCard = ({ question, answers, questionID }) => {
+  const [answerSelection, setAnswerSelection] = useState(0);
+  const [voted, setVoted] = useState(false);
+
+  const userID = useGetUserID();
+  const [cookies, _] = useCookies(["access_token"]);
+
+  const onSubmit = async (event) => {
+    // event.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/questions/${questionID}/${userID}/${answerSelection}`
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  // when trivia card is loaded
+  // check if user voted
+  // if voted show vote percentages and disable voting for user
+  useEffect(() => {
+    const checkIfVoted = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/user/${userID}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
+        );
+        for (let i = 0; i < response.data.questionsVoted.length; i++) {
+          if (response.data.questionsVoted[i].question === questionID) {
+            setVoted(true);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (window.localStorage.getItem("userID")) {
+      checkIfVoted();
+    } else {
+      setVoted(true);
+    }
+  }, []);
 
   return (
     <div>
@@ -13,25 +57,33 @@ const TriviaCard = ({ question, answers }) => {
       >
         <h1 className="text-center">{question}</h1>
 
-        {/* <li key={answers._id} className="">
-          <input type="radio" id="html" name="fav_language" value="HTML" />
-          <label className="ml-1" htmlFor="html">
-            {answers}
-          </label>
-        </li> */}
-
-        {answers.map((answer) => (
+        {answers.map((answer, index) => (
           <div key={answer._id} className="">
-            <input type="radio" id="option" name="option" value="option" />
+            <input
+              onChange={(event) => {
+                setAnswerSelection(index);
+              }}
+              type="radio"
+              id="option"
+              name="option"
+              value={index}
+              required
+            />
             <label className="ml-1" htmlFor="option">
               {answer.name}
             </label>
           </div>
         ))}
 
-        <button className="p-1 bg-red-400 text-slate-50 m-2 rounded-md w-[75px] mx-auto">
-          Submit
-        </button>
+        {!voted ? (
+          <button className="p-1 bg-red-400 text-slate-50 m-2 rounded-md w-[75px] mx-auto">
+            Submit
+          </button>
+        ) : (
+          <p className="p-1 bg-red-400 text-slate-50 m-2 rounded-md w-[100px] mx-auto text-center">
+            {window.localStorage.getItem("userID") ? "voted" : "login to vote"}
+          </p>
+        )}
       </form>
     </div>
   );

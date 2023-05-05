@@ -37,6 +37,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// router.get("/user-voted/:userID", verifyToken, async (req, res) => {
+
+// })
+
 // create new question (must be logged in)
 router.post("/:id", verifyToken, async (req, res) => {
   const question = new QuestionModel(req.body);
@@ -54,9 +58,43 @@ router.post("/:id", verifyToken, async (req, res) => {
 });
 
 // updates question with vote
-
-router.put("/:id", verifyToken, async (req, res) => {
-  const question = await QuestionModel.findById(req.params.id);
+router.put("/:questionID/:userID/:answerSelection", async (req, res) => {
+  const question = await QuestionModel.findById(req.params.questionID);
+  const user = await UserModel.findById(req.params.userID);
+  // console.log(req.params.answerSelection + " " + question.correctAnswerIndex);
+  try {
+    if (question.correctAnswerIndex == req.params.answerSelection) {
+      await UserModel.findOneAndUpdate(
+        { _id: req.params.userID },
+        {
+          $inc: { correctlyAnswered: 1 },
+          $push: {
+            questionsVoted: { question: req.params.questionID, correct: true },
+          },
+        }
+      );
+      await QuestionModel.findOneAndUpdate(
+        { _id: req.params.questionID },
+        { $inc: { correctlyAnswered: 1 } }
+      );
+    } else {
+      await UserModel.findOneAndUpdate(
+        { _id: req.params.userID },
+        {
+          $inc: { incorrectlyAnswered: 1 },
+          $push: {
+            questionsVoted: { question: req.params.questionID, correct: false },
+          },
+        }
+      );
+      await QuestionModel.findOneAndUpdate(
+        { _id: req.params.questionID },
+        { $inc: { incorrectlyAnswered: 1 } }
+      );
+    }
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 export { router as questionsRouter };

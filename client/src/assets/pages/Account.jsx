@@ -34,6 +34,7 @@ const Account = () => {
           key={question._id}
           question={question.question}
           answers={question.answers}
+          questionID={question._id}
         />
       ))}
     </div>
