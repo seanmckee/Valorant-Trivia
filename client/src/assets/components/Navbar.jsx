@@ -30,13 +30,7 @@ const Navbar = () => {
         </Link>
       ) : (
         <div>
-          <Popup
-            trigger={<button className="mx-5 mt-[-9px]">Create</button>}
-            modal
-            nested
-          >
-            <CreateTrivia />
-          </Popup>
+          <CreateTrivia />
           <Link to="/account" className="mx-5">
             Account
           </Link>

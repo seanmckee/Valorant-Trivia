@@ -89,4 +89,8 @@ const TriviaCard = ({ question, answers, questionID }) => {
   );
 };
 
+const VotingResults = () => {
+  return <div></div>;
+};
+
 export default TriviaCard;
