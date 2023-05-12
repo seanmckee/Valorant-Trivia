@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
   if (!user) {
     res.status(404).send("Link Not Found - invalid id");
   }
-  console.log(req.params.id);
+  // console.log(req.params.id);
   const questions = user.questions;
 
   try {
@@ -75,7 +75,11 @@ router.put("/:questionID/:userID/:answerSelection", async (req, res) => {
       );
       await QuestionModel.findOneAndUpdate(
         { _id: req.params.questionID },
-        { $inc: { correctlyAnswered: 1 } }
+        {
+          $inc: { correctlyAnswered: 1 },
+          $inc: { [`answers.${req.params.answerSelection}.votes`]: 1 },
+          $push: { voted: req.params.userID },
+        }
       );
     } else {
       await UserModel.findOneAndUpdate(
@@ -89,7 +93,11 @@ router.put("/:questionID/:userID/:answerSelection", async (req, res) => {
       );
       await QuestionModel.findOneAndUpdate(
         { _id: req.params.questionID },
-        { $inc: { incorrectlyAnswered: 1 } }
+        {
+          $inc: { incorrectlyAnswered: 1 },
+          $inc: { [`answers.${req.params.answerSelection}.votes`]: 1 },
+          $push: { voted: req.params.userID },
+        }
       );
     }
   } catch (error) {

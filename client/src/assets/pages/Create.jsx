@@ -65,6 +65,10 @@ const Create = () => {
 
   const newAnswer = (event) => {
     event.preventDefault();
+    if (currentAnswer.length === 0) {
+      alert("Enter a valid answer");
+      return;
+    }
     setAnswers([...answers, { name: currentAnswer, votes: 0 }]);
     setCurrentAnswer("");
   };
@@ -88,17 +92,19 @@ const Create = () => {
           type="text"
           name="question"
           value={question}
+          id="question"
           onChange={(event) => setQuestion(event.target.value)}
           required
         />
 
-        <label className="text-red-500 mb-1 ml-2" htmlFor="question">
+        <label className="text-red-500 mb-1 ml-2" htmlFor="answer">
           Enter Answers
         </label>
         <div className="flex">
           <input
             className="m-2 mt-0 p-2 rounded-md border border-red-400 focus:border-3 focus:border-red-400"
             type="text"
+            id="answer"
             value={currentAnswer}
             onChange={(event) => setCurrentAnswer(event.target.value)}
           />
@@ -121,9 +127,9 @@ const Create = () => {
                 }}
                 type="radio"
                 name="option"
-                id="option"
+                id={"option" + index}
               />
-              <label className="mt-2" htmlFor="option">
+              <label className="mt-2" htmlFor={"option" + index}>
                 {answer.name}
               </label>
               <button

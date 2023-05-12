@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
 
-const TriviaCard = ({ question, answers, questionID }) => {
+const TriviaCard = ({ question, answers, questionID, votedArr }) => {
   const [answerSelection, setAnswerSelection] = useState(0);
   const [voted, setVoted] = useState(false);
 
@@ -56,6 +56,7 @@ const TriviaCard = ({ question, answers, questionID }) => {
         className=" text-red-400 bg-white rounded-2xl h-[200px] p-5 shadow-xl border border-red-400 border-1"
       >
         <h1 className="text-center">{question}</h1>
+        {console.log(answers)}
 
         {answers.map((answer, index) => (
           <div key={answer._id} className="">
@@ -70,7 +71,14 @@ const TriviaCard = ({ question, answers, questionID }) => {
               required
             />
             <label className="ml-1" htmlFor={answer._id}>
-              {answer.name}
+              {!voted || !window.localStorage.getItem("userID")
+                ? answer.name
+                : answer.name +
+                  ", " +
+                  Math.floor((answer.votes / votedArr.length) * 100) +
+                  "%, (" +
+                  answer.votes +
+                  ")"}
             </label>
           </div>
         ))}

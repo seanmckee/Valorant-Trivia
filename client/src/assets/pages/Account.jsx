@@ -35,6 +35,7 @@ const Account = () => {
           question={question.question}
           answers={question.answers}
           questionID={question._id}
+          votedArr={t.voted}
         />
       ))}
     </div>

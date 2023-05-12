@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Popup from "reactjs-popup";
-import CreateTrivia from "./CreateTrivia";
 
 const Navbar = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);

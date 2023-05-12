@@ -36,6 +36,7 @@ const Home = () => {
             question={t.question}
             answers={t.answers}
             questionID={t._id}
+            votedArr={t.voted}
           />
         ))}
       </div>
