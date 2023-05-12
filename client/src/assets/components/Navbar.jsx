@@ -30,7 +30,9 @@ const Navbar = () => {
         </Link>
       ) : (
         <div>
-          <CreateTrivia />
+          <Link to="/create" className="mx-5">
+            Create
+          </Link>
           <Link to="/account" className="mx-5">
             Account
           </Link>

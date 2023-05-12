@@ -4,6 +4,7 @@ import Home from "./assets/pages/Home";
 import Login from "./assets/pages/Login";
 import Register from "./assets/pages/Register";
 import Account from "./assets/pages/Account";
+import Create from "./assets/pages/Create";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </Router>
     </div>

@@ -47,7 +47,7 @@ const TriviaCard = ({ question, answers, questionID }) => {
     } else {
       setVoted(true);
     }
-  }, []);
+  }, [voted]);
 
   return (
     <div>
@@ -64,12 +64,12 @@ const TriviaCard = ({ question, answers, questionID }) => {
                 setAnswerSelection(index);
               }}
               type="radio"
-              id="option"
+              id={answer._id}
               name="option"
               value={index}
               required
             />
-            <label className="ml-1" htmlFor="option">
+            <label className="ml-1" htmlFor={answer._id}>
               {answer.name}
             </label>
           </div>
@@ -80,7 +80,7 @@ const TriviaCard = ({ question, answers, questionID }) => {
             Submit
           </button>
         ) : (
-          <p className="p-1 bg-red-400 text-slate-50 m-2 rounded-md w-[100px] mx-auto text-center">
+          <p className="p-1 bg-red-400 text-slate-50 m-2 rounded-md w-[100px]  text-center">
             {window.localStorage.getItem("userID") ? "voted" : "login to vote"}
           </p>
         )}
@@ -90,7 +90,11 @@ const TriviaCard = ({ question, answers, questionID }) => {
 };
 
 const VotingResults = () => {
-  return <div></div>;
+  return (
+    <div>
+      <p></p>
+    </div>
+  );
 };
 
 export default TriviaCard;
