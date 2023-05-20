@@ -69,7 +69,11 @@ router.put("/:questionID/:userID/:answerSelection", async (req, res) => {
         {
           $inc: { correctlyAnswered: 1 },
           $push: {
-            questionsVoted: { question: req.params.questionID, correct: true },
+            questionsVoted: {
+              question: req.params.questionID,
+              correct: true,
+              votedIndex: req.params.answerSelection,
+            },
           },
         }
       );
@@ -77,7 +81,9 @@ router.put("/:questionID/:userID/:answerSelection", async (req, res) => {
         { _id: req.params.questionID },
         {
           $inc: { correctlyAnswered: 1 },
-          $inc: { [`answers.${req.params.answerSelection}.votes`]: 1 },
+          $inc: {
+            [`answers.${req.params.answerSelection}.votes`]: 1,
+          },
           $push: { voted: req.params.userID },
         }
       );
@@ -87,7 +93,11 @@ router.put("/:questionID/:userID/:answerSelection", async (req, res) => {
         {
           $inc: { incorrectlyAnswered: 1 },
           $push: {
-            questionsVoted: { question: req.params.questionID, correct: false },
+            questionsVoted: {
+              question: req.params.questionID,
+              correct: false,
+              votedIndex: req.params.answerSelection,
+            },
           },
         }
       );

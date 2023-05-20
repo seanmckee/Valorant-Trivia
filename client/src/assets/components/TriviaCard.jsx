@@ -3,10 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
 
-const TriviaCard = ({ question, answers, questionID, votedArr }) => {
+const TriviaCard = ({
+  question,
+  answers,
+  questionID,
+  votedArr,
+  correctAnswerIndex,
+}) => {
   const [answerSelection, setAnswerSelection] = useState(0);
   const [voted, setVoted] = useState(false);
   const [voterCount, setVoterCount] = useState(votedArr.length);
+
+  // state in order to update answer labels on vote submit
+  const [theAnswers, setTheAnswers] = useState(answers);
 
   {
     /* 
@@ -21,6 +30,13 @@ const TriviaCard = ({ question, answers, questionID, votedArr }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    // creates new theAnswers array and puts it into theAnwers state
+    let ans = [...theAnswers];
+    let an = { ...ans[answerSelection] };
+    an.votes = an.votes + 1;
+    ans[answerSelection] = an;
+    setTheAnswers(ans);
 
     setVoterCount((c) => c + 1);
 
@@ -49,6 +65,8 @@ const TriviaCard = ({ question, answers, questionID, votedArr }) => {
         for (let i = 0; i < response.data.questionsVoted.length; i++) {
           if (response.data.questionsVoted[i].question === questionID) {
             setVoted(true);
+            setAnswerSelection(response.data.questionsVoted[i].votedIndex);
+            // console.log("votedindex: " + answerSelection);
           }
         }
       } catch (error) {
@@ -72,8 +90,8 @@ const TriviaCard = ({ question, answers, questionID, votedArr }) => {
         {/* {console.log(cardAnswers)} */}
 
         {answers &&
-          answers.map((answer, index) => (
-            <div key={answer._id} className="">
+          theAnswers.map((answer, index) => (
+            <div key={answer._id} className="m-1">
               <input
                 onChange={(event) => {
                   setAnswerSelection(index);
@@ -84,7 +102,21 @@ const TriviaCard = ({ question, answers, questionID, votedArr }) => {
                 value={index}
                 required
               />
-              <label className="ml-1" htmlFor={answer._id}>
+              <label
+                className={
+                  index === correctAnswerIndex &&
+                  voted &&
+                  window.localStorage.getItem("userID")
+                    ? "ml-1 bg-green-200 p-[2px] rounded-lg text-green-700"
+                    : index === answerSelection &&
+                      voted &&
+                      window.localStorage.getItem("userID") &&
+                      answerSelection !== correctAnswerIndex
+                    ? "ml-1 bg-red-200 p-[2px] rounded-lg text-red-700"
+                    : "ml-1"
+                }
+                htmlFor={answer._id}
+              >
                 {!voted || !window.localStorage.getItem("userID")
                   ? answer.name
                   : answer.name +

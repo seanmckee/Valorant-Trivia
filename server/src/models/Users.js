@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const questionAnsweredSchema = new mongoose.Schema({
   question: { type: mongoose.Schema.Types.ObjectId, ref: "questions" },
   correct: { type: Boolean, required: true },
+  votedIndex: { type: Number },
 });
 
 const UserSchema = new mongoose.Schema({

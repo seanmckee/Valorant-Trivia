@@ -86,6 +86,7 @@ const Account = () => {
             answers={question.answers}
             questionID={question._id}
             votedArr={question.voted}
+            correctAnswerIndex={question.correctAnswerIndex}
           />
         ))}
       </div>

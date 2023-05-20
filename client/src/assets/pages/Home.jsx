@@ -37,6 +37,7 @@ const Home = () => {
             answers={t.answers}
             questionID={t._id}
             votedArr={t.voted}
+            correctAnswerIndex={t.correctAnswerIndex}
           />
         ))}
       </div>

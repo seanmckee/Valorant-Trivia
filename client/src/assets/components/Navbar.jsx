@@ -49,7 +49,7 @@ const Navbar = () => {
         )}
       </div>
 
-      <div onClick={handleClick} className="md:hidden z-50">
+      <div onClick={handleClick} className="md:hidden z-50 relative">
         {!nav ? <FaBars /> : <FaTimes />}
       </div>
 
@@ -58,7 +58,7 @@ const Navbar = () => {
         className={
           !nav
             ? "hidden"
-            : "absolute top-0 left-0 w-full h-screen bg-red-400 flex flex-col justify-center items-center"
+            : "text-center absolute top-0 left-0 w-full h-screen bg-red-400 flex flex-col justify-center items-center"
         }
       >
         <li className="py-6 text-4xl">
@@ -66,21 +66,32 @@ const Navbar = () => {
             Home
           </Link>
         </li>
-        <li className="py-6 text-4xl">
-          <Link onClick={handleClick} to="login" className="mx-5">
-            Login
-          </Link>
-        </li>
-        <li className="py-6 text-4xl">
-          <Link onClick={handleClick} to="/create" className="mx-5">
-            Create
-          </Link>
-        </li>
-        <li className="py-6 text-4xl">
-          <Link onClick={handleClick} to="/account" className="mx-5">
-            Account
-          </Link>
-        </li>
+
+        {!cookies.access_token ? (
+          <li className="py-6 text-4xl">
+            <Link onClick={handleClick} to="login" className="mx-5">
+              Login
+            </Link>
+          </li>
+        ) : (
+          <div>
+            <li className="py-6 text-4xl">
+              <Link onClick={handleClick} to="/create" className="mx-5">
+                Create
+              </Link>
+            </li>
+            <li className="py-6 text-4xl">
+              <Link onClick={handleClick} to="/account" className="mx-5">
+                Account
+              </Link>
+            </li>
+            <li className="py-6 text-4xl">
+              <button onClick={logout} className="mx-5 mt-[-9px]">
+                Logout
+              </button>
+            </li>
+          </div>
+        )}
       </ul>
     </div>
   );
