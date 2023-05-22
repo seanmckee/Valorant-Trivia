@@ -22,23 +22,24 @@ const Home = () => {
   // console.log(trivia);
 
   return (
-    <div className="w-[80%] mx-auto">
+    <div className="lg:w-[50%] w-[80%] mx-auto">
       <h1 className="text-center text-red-400 text-3xl font-semibold mt-5 mb-1">
         Home
       </h1>
       <p className="text-center text-red-400 mb-4">
         Browse All Valorant Trivia Here
       </p>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="grid gap-5">
         {trivia.map((t) => (
-          <TriviaCard
-            key={t._id}
-            question={t.question}
-            answers={t.answers}
-            questionID={t._id}
-            votedArr={t.voted}
-            correctAnswerIndex={t.correctAnswerIndex}
-          />
+          <div key={t._id}>
+            <TriviaCard
+              question={t.question}
+              answers={t.answers}
+              questionID={t._id}
+              votedArr={t.voted}
+              correctAnswerIndex={t.correctAnswerIndex}
+            />{" "}
+          </div>
         ))}
       </div>
     </div>

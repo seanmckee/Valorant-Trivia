@@ -45,7 +45,7 @@ const Account = () => {
   }, []);
 
   return (
-    <div className="w-[80%] mx-auto">
+    <div className="lg:w-[40%] w-[80%] mx-auto">
       <h1 className="text-center text-red-400 text-3xl font-semibold mt-5 mb-1">
         Account
       </h1>
@@ -59,7 +59,11 @@ const Account = () => {
           {user && user.correctlyAnswered
             ? Math.round(
                 (user.correctlyAnswered /
-                  (user.correctlyAnswered + user.incorrectlyAnswered)) *
+                  (user.correctlyAnswered
+                    ? user.correctlyAnswered
+                    : 0 + user.incorrectlyAnswered
+                    ? user.incorrectlyAnswered
+                    : 0)) *
                   100
               )
             : 0}
@@ -70,7 +74,11 @@ const Account = () => {
           {user && user.incorrectlyAnswered
             ? Math.round(
                 (user.incorrectlyAnswered /
-                  (user.correctlyAnswered + user.incorrectlyAnswered)) *
+                  (user.correctlyAnswered
+                    ? user.correctlyAnswered
+                    : 0 + user.incorrectlyAnswered
+                    ? user.incorrectlyAnswered
+                    : 0)) *
                   100
               )
             : 0}
@@ -78,16 +86,17 @@ const Account = () => {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5 mt-4">
+      <div className="grid gap-5">
         {questions.map((question) => (
-          <TriviaCard
-            key={question._id}
-            question={question.question}
-            answers={question.answers}
-            questionID={question._id}
-            votedArr={question.voted}
-            correctAnswerIndex={question.correctAnswerIndex}
-          />
+          <div key={question._id}>
+            <TriviaCard
+              question={question.question}
+              answers={question.answers}
+              questionID={question._id}
+              votedArr={question.voted}
+              correctAnswerIndex={question.correctAnswerIndex}
+            />
+          </div>
         ))}
       </div>
     </div>

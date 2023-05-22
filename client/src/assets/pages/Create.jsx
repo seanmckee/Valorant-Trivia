@@ -79,7 +79,7 @@ const Create = () => {
   // };
 
   return (
-    <div className="bg-slate-100 border border-red-400 p-20 rounded-md shadow-xl">
+    <div className="w-[80%] mx-auto mt-10">
       <h1 className="text-center text-red-400 text-xl mb-5 font-semibold">
         Create New Trivia
       </h1>
