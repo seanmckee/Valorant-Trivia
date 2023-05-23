@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useCookies } from "react-cookie";
-import { useGetUserID } from "../../hooks/useGetUserID";
+import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
 import TriviaCard from "../components/TriviaCard";
 
@@ -45,7 +45,7 @@ const Account = () => {
   }, []);
 
   return (
-    <div className="lg:w-[40%] w-[80%] mx-auto">
+    <div className="w-[80%] mx-auto">
       <h1 className="text-center text-red-400 text-3xl font-semibold mt-5 mb-1">
         Account
       </h1>
@@ -59,11 +59,10 @@ const Account = () => {
           {user && user.correctlyAnswered
             ? Math.round(
                 (user.correctlyAnswered /
-                  (user.correctlyAnswered
-                    ? user.correctlyAnswered
-                    : 0 + user.incorrectlyAnswered
-                    ? user.incorrectlyAnswered
-                    : 0)) *
+                  ((user.correctlyAnswered ? user.correctlyAnswered : 0) +
+                    (user.incorrectlyAnswered
+                      ? user.incorrectlyAnswered
+                      : 0))) *
                   100
               )
             : 0}
@@ -74,11 +73,10 @@ const Account = () => {
           {user && user.incorrectlyAnswered
             ? Math.round(
                 (user.incorrectlyAnswered /
-                  (user.correctlyAnswered
-                    ? user.correctlyAnswered
-                    : 0 + user.incorrectlyAnswered
-                    ? user.incorrectlyAnswered
-                    : 0)) *
+                  ((user.correctlyAnswered ? user.correctlyAnswered : 0) +
+                    (user.incorrectlyAnswered
+                      ? user.incorrectlyAnswered
+                      : 0))) *
                   100
               )
             : 0}
@@ -86,7 +84,7 @@ const Account = () => {
         </p>
       </div>
 
-      <div className="grid gap-5">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
         {questions.map((question) => (
           <div key={question._id}>
             <TriviaCard

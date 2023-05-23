@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Popup from "reactjs-popup";
-import { useGetUserID } from "../../hooks/useGetUserID";
+import { useGetUserID } from "../hooks/useGetUserID";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 import axios from "axios";
@@ -18,11 +18,6 @@ const Create = () => {
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState();
 
-  // const onChange = (event) => {
-  //   setCorrectAnswer(event.target.value);
-  //   console.log(correctAnswer);
-  // };
-
   const onSubmit = async (event) => {
     event.preventDefault();
 
@@ -34,7 +29,6 @@ const Create = () => {
     }
 
     try {
-      console.log({ question, answers, userOwner: userID });
       await axios.post(
         `http://localhost:3001/questions/${userID}`,
         {
@@ -59,8 +53,6 @@ const Create = () => {
 
     answersCopy.splice(index, 1);
     setAnswers(answersCopy);
-
-    console.log(answersCopy);
   };
 
   const newAnswer = (event) => {
@@ -73,18 +65,16 @@ const Create = () => {
     setCurrentAnswer("");
   };
 
-  // const togglePopUp = () => {
-  //   setOpen((open) => !open);
-  //   console.log(open);
-  // };
-
   return (
-    <div className="w-[80%] mx-auto mt-10">
+    <div className="w-[50%] mx-auto mt-10">
       <h1 className="text-center text-red-400 text-xl mb-5 font-semibold">
         Create New Trivia
       </h1>
       <form className="flex flex-col" onSubmit={onSubmit}>
-        <label className="text-red-500 mb-1 ml-2" htmlFor="question">
+        <label
+          className="text-red-500 mb-1 ml-2 text-center"
+          htmlFor="question"
+        >
           Enter Question
         </label>
         <input
@@ -97,19 +87,19 @@ const Create = () => {
           required
         />
 
-        <label className="text-red-500 mb-1 ml-2" htmlFor="answer">
+        <label className="text-red-500 mb-1 ml-2 text-center" htmlFor="answer">
           Enter Answers
         </label>
         <div className="flex">
           <input
-            className="m-2 mt-0 p-2 rounded-md border border-red-400 focus:border-3 focus:border-red-400"
+            className="ml-2 mt-0 p-2 rounded-md border border-red-400 focus:border-3 focus:border-red-400 w-full m-auto"
             type="text"
             id="answer"
             value={currentAnswer}
             onChange={(event) => setCurrentAnswer(event.target.value)}
           />
           <button
-            className="p-2 bg-red-400 text-slate-50 m-2 rounded-md px-4 mx-auto"
+            className="p-2 bg-red-400 text-slate-50 ml-1 rounded-md px-4 w-[48px] h-[42px]"
             onClick={newAnswer}
           >
             <AiFillPlusCircle />

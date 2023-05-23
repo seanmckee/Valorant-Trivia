@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useGetUserID } from "../../hooks/useGetUserID";
+import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
 
 const TriviaCard = ({
@@ -84,15 +84,15 @@ const TriviaCard = ({
     <div className="m-auto text-center">
       <form
         onSubmit={onSubmit}
-        className=" text-red-400 bg-white rounded-2xl p-5 shadow-xl border border-red-400 border-1"
+        className=" text-red-400 bg-white rounded-2xl p-5 shadow-xl border border-red-400 border-1 h-[300px]"
       >
-        <h1 className="text-center border-b-2 border-red-300 pb-2">
+        <div className="text-center border-b-2 mb-2 border-red-300 pb-4 max-h-[70px] overflow-y-auto">
           {question}
-        </h1>
+        </div>
 
         {/* {console.log(cardAnswers)} */}
 
-        <div className="text-center m-auto">
+        <div className="text-center m-auto max-h-[150px] overflow-y-auto">
           {answers &&
             theAnswers.map((answer, index) => (
               <div key={answer._id} className="m-1">
@@ -145,14 +145,6 @@ const TriviaCard = ({
           </p>
         )}
       </form>
-    </div>
-  );
-};
-
-const VotingResults = () => {
-  return (
-    <div>
-      <p></p>
     </div>
   );
 };
