@@ -13,7 +13,7 @@ dotenv.config({ path: "./config/.env" });
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({ origin: ["https://valorant-trivia.onrender.com"] }));
+app.use(cors());
 
 app.use("/auth", userRouter);
 app.use("/questions", questionsRouter);
