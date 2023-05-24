@@ -30,7 +30,7 @@ const Create = () => {
 
     try {
       await axios.post(
-        `http://localhost:3001/questions/${userID}`,
+        `https://valorant-trivia.onrender.com/questions/${userID}`,
         {
           question,
           answers,

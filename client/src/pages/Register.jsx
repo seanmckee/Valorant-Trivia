@@ -20,7 +20,7 @@ const Register = () => {
       alert("Passwords do not match");
     } else {
       try {
-        await axios.post("http://localhost:3001/auth/register", {
+        await axios.post("https://valorant-trivia.onrender.com/auth/register", {
           username,
           password,
         });

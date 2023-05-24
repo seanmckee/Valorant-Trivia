@@ -16,7 +16,7 @@ const Account = () => {
     const getQuestions = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/questions/${userID}`
+          `https://valorant-trivia.onrender.com/questions/${userID}`
         );
         // console.log(JSON.stringify(response.data));
         // console.log(response.data);
@@ -29,7 +29,7 @@ const Account = () => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/user/${userID}`,
+          `https://valorant-trivia.onrender.com/user/${userID}`,
           {
             headers: { authorization: cookies.access_token },
           }

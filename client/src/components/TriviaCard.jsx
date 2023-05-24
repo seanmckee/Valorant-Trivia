@@ -43,7 +43,7 @@ const TriviaCard = ({
     setVoted((v) => !v);
     try {
       const response = await axios.put(
-        `http://localhost:3001/questions/${questionID}/${userID}/${answerSelection}`
+        `https://valorant-trivia.onrender.com/questions/${questionID}/${userID}/${answerSelection}`
       );
     } catch (error) {
       console.error(error);
@@ -57,7 +57,7 @@ const TriviaCard = ({
     const checkIfVoted = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/user/${userID}`,
+          `https://valorant-trivia.onrender.com/user/${userID}`,
           {
             headers: { authorization: cookies.access_token },
           }

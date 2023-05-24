@@ -15,10 +15,13 @@ const Login = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://valorant-trivia.onrender.com/auth/login",
+        {
+          username,
+          password,
+        }
+      );
       if (response.data.userID === undefined) {
         alert("Wrong Username and/or Password");
         setUsername("");

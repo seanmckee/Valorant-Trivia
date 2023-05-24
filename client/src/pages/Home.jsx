@@ -7,7 +7,9 @@ const Home = () => {
 
   const getTrivia = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/questions");
+      const response = await axios.get(
+        "https://valorant-trivia.onrender.com/questions"
+      );
       setTrivia(response.data);
       // console.log(response.data);
     } catch (error) {
