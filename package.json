@@ -1,0 +1,21 @@
+{
+  "name": "valorant-trivia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd server && npm install  && cd ../client && npm install && npm run build",
+    "start": "node server/src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmckee/Valorant-Trivia.git"
+  },
+  "author": "Sean McKee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanmckee/Valorant-Trivia/issues"
+  },
+  "homepage": "https://github.com/seanmckee/Valorant-Trivia#readme"
+}
