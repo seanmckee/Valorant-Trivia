@@ -4,7 +4,8 @@
   "description": "full stack website where users can answer valorant trivia questions",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js",
+    "main": "node src/server.js"
   },
   "author": "Sean Mckee",
   "license": "ISC",
