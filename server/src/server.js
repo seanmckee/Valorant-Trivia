@@ -26,7 +26,7 @@ app.use("/user", userInfoRouter);
 // );
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(path.resolve(), "/client/dist/index.html"));
+  res.sendFile("../client/dist/index.html");
 });
 
 mongoose.connect(process.env.Connection);
