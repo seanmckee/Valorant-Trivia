@@ -15,19 +15,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://valorant-trivia.onrender.com",
+    origin: "https://sprightly-otter-8f8db4.netlify.app/",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
   })
 );
 
 app.use("/auth", userRouter);
 app.use("/questions", questionsRouter);
 app.use("/user", userInfoRouter);
-
-// const __dirname = path.resolve();
-// app.use(express.static(path.join(__dirname, "/client/dist")));
-// app.get("*", (req, res) =>
-//   res.sendFile(path.join(__dirname, "/client/dist/index.html"))
-// );
 
 mongoose.connect(process.env.Connection);
 
