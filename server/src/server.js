@@ -25,10 +25,6 @@ app.use("/user", userInfoRouter);
 //   res.sendFile(path.join(__dirname, "/client/dist/index.html"))
 // );
 
-app.get("/", (req, res) => {
-  res.sendFile("../client/dist/index.html");
-});
-
 mongoose.connect(process.env.Connection);
 
 app.listen(3001, () => console.log("SERVER STARTED"));
