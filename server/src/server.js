@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://valorant-trivia.netlify.app/",
+    origin: "https://valorant-trivia.netlify.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
