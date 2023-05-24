@@ -19,6 +19,16 @@ app.use("/auth", userRouter);
 app.use("/questions", questionsRouter);
 app.use("/user", userInfoRouter);
 
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, "/client/dist")));
+// app.get("*", (req, res) =>
+//   res.sendFile(path.join(__dirname, "/client/dist/index.html"))
+// );
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "/client/dist/index.html"));
+});
+
 mongoose.connect(process.env.Connection);
 
 app.listen(3001, () => console.log("SERVER STARTED"));
