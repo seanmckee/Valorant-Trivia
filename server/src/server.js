@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://sprightly-otter-8f8db4.netlify.app/",
+    origin: "https://gorgeous-biscuit-c534b0.netlify.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
